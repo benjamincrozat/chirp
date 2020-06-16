@@ -24,6 +24,25 @@ class TweetPresenter
         return collect($this->data->extended_entities->media ?? []);
     }
 
+    public function parentTweetAuthorUrl() : string
+    {
+        return "https://twitter.com/{$this->data->in_reply_to_screen_name}";
+    }
+
+    public function parentTweetUrl() : string
+    {
+        return "https://twitter.com/{$this->data->in_reply_to_screen_name}/status/{$this->data->in_reply_to_status_id}";
+    }
+
+    public function quotedStatus() : ?self
+    {
+        if (empty($this->data->quoted_status)) {
+            return null;
+        }
+
+        return new self($this->data->quoted_status);
+    }
+
     public function text() : string
     {
         return $this->render('full_text');

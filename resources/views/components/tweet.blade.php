@@ -1,4 +1,4 @@
-<div class="bg-gray-700 px-4 py-8 sm:p-8 relative rounded shadow">
+<div class="relative @empty($quote) bg-gray-700 px-4 py-8 sm:p-8 rounded shadow @else bg-gray-800 bg-opacity-50 p-4 rounded-sm @endif">
     <div class="sm:flex sm:items-center sm:justify-between">
         <a href="{{ $tweet->userUrl() }}" target="_blank" class="flex items-center sm:pr-4 hover:text-yellow-500">
             <img src="{{ $tweet->userAvatar() }}" width="48" height="48" class="flex-none rounded-full">
@@ -14,9 +14,25 @@
         </p>
     </div>
 
-    <p class="hyphens mt-6">
+    @if ($tweet->data->in_reply_to_status_id)
+        <div class="text-center">
+            <p class="bg-gray-800 bg-opacity-50 mt-8 px-4 py-3 rounded">
+                In reply to <a href="{{ $tweet->parentTweetUrl() }}" class="font-semibold hover:text-yellow-500">a tweet</a> from <a href="{{ $tweet->parentTweetAuthorUrl() }}" class="font-semibold hover:text-yellow-500">{{ $tweet->data->in_reply_to_screen_name }}</a>
+            </p>
+
+            <x-zondicon-arrow-thick-down class="inline-block h-8 mt-8 text-gray-500" />
+        </div>
+    @endif
+
+    <p class="hyphens mt-8">
         {!! $tweet->text() !!}
     </p>
+
+    @if ($quotedStatus = $tweet->quotedStatus())
+        <div class="block mt-8">
+            <x-tweet :tweet="$quotedStatus" :quote="true" />
+        </div>
+    @endif
 
     @if ($tweet->media()->isNotEmpty())
         <div class="flex mt-6">
@@ -28,9 +44,9 @@
         </div>
     @endif
 
-    <p class="mt-8 text-center">
-        <a href="{{ $tweet->url() }}" target="_blank" rel="noopener" class="font-semibold hover:text-yellow-500">More on Twitter</a>
-    </p>
-
-    <span class="-mx-2 absolute bg-red-500 block mt-2 p-2 right-0 sm:right-auto sm:left-0 rounded-sm shadow-sm top-0"><x:zondicon-heart class="fill-current h-4" /></span>
+    @empty($quote)
+        <p class="mt-8 text-center">
+            <a href="{{ $tweet->url() }}" target="_blank" rel="noopener" class="font-semibold hover:text-yellow-500">More on Twitter</a>
+        </p>
+    @endif
 </div>
