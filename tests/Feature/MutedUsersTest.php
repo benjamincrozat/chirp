@@ -35,7 +35,7 @@ class MutedUsersTest extends TestCase
             ->contains(number_format($user->muted_count) . ' muted users')
         ;
 
-        $this->assertGreaterThan($perPage = 30, $response->original->blockedUsers->total());
-        $this->assertCount($perPage, $response->original->blockedUsers);
+        $this->assertGreaterThan($perPage = 30, $response->original->mutedUsers->total());
+        $this->assertCount($perPage, $response->original->mutedUsers);
     }
 }
