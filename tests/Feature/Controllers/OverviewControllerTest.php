@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Controllers;
 
 use Tests\TestCase;
 use Tests\Concerns\CreatesUser;
 
-class OverviewTest extends TestCase
+class OverviewControllerTest extends TestCase
 {
     use CreatesUser;
 

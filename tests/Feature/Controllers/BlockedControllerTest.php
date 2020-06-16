@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Controllers;
 
 use Tests\TestCase;
 use App\Jobs\FetchBlockedUsers;
 use Tests\Concerns\CreatesUser;
 
-class BlockedUsersTest extends TestCase
+class BlockedControllerTest extends TestCase
 {
     use CreatesUser;
 

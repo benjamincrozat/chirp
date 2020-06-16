@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Listeners;
 
 use Tests\TestCase;
 use App\Jobs\FetchLikes;
@@ -12,7 +12,7 @@ use Tests\Concerns\CreatesUser;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Auth\Events\Registered;
 
-class RegistrationTest extends TestCase
+class FetchNewUserDataTest extends TestCase
 {
     use CreatesUser;
 

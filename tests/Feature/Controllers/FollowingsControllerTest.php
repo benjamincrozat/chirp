@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Controllers;
 
 use Tests\TestCase;
 use App\Jobs\FetchFollowings;
 use Tests\Concerns\CreatesUser;
 
-class FollowingsTest extends TestCase
+class FollowingsControllerTest extends TestCase
 {
     use CreatesUser;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Controllers;
 
 use Tests\TestCase;
 use App\Jobs\FetchMutedUsers;
 use Tests\Concerns\CreatesUser;
 
-class MutedUsersTest extends TestCase
+class MutedControllerTest extends TestCase
 {
     use CreatesUser;
 
