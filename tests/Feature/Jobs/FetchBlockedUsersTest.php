@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Jobs;
 
+use App\Blocked;
 use Tests\TestCase;
 use App\Jobs\FetchBlockedUsers;
 use Tests\Concerns\CreatesUser;
@@ -42,5 +43,27 @@ class FetchBlockedUsersTest extends TestCase
             $countAfterRemoving + 10,
             $user->blocked()->count()
         );
+    }
+
+    /** @test */
+    public function it_removes_non_existing_blocked_users_from_database() : void
+    {
+        FetchBlockedUsers::dispatch($user = $this->createUser());
+
+        $initialCount = $user->blocked()->count();
+
+        Blocked::create([
+            'id'       => 666,
+            'user_id'  => $user->id,
+            'name'     => 'Homer Simpson',
+            'nickname' => 'homersimpson',
+            'data'     => ['foo' => 'bar'],
+        ]);
+
+        $this->assertEquals($initialCount + 1, $user->blocked()->count());
+
+        FetchBlockedUsers::dispatch($user);
+
+        $this->assertEquals($initialCount, $user->blocked()->count());
     }
 }

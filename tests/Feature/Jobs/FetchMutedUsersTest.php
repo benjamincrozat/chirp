@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Jobs;
 
+use App\Muted;
 use Tests\TestCase;
 use App\Jobs\FetchMutedUsers;
 use Tests\Concerns\CreatesUser;
@@ -42,5 +43,27 @@ class FetchMutedUsersTest extends TestCase
             $countAfterRemoving + 10,
             $user->muted()->count()
         );
+    }
+
+    /** @test */
+    public function it_removes_non_existing_muted_users_from_database() : void
+    {
+        FetchMutedUsers::dispatch($user = $this->createUser());
+
+        $initialCount = $user->muted()->count();
+
+        Muted::create([
+            'id'       => 666,
+            'user_id'  => $user->id,
+            'name'     => 'Homer Simpson',
+            'nickname' => 'homersimpson',
+            'data'     => ['foo' => 'bar'],
+        ]);
+
+        $this->assertEquals($initialCount + 1, $user->muted()->count());
+
+        FetchMutedUsers::dispatch($user);
+
+        $this->assertEquals($initialCount, $user->muted()->count());
     }
 }

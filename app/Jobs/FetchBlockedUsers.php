@@ -48,7 +48,7 @@ class FetchBlockedUsers extends BaseJob
     protected function deleteUnecessaryUsers() : self
     {
         Blocked::whereUserId($this->user->id)
-            ->whereNotIn('id', $this->users->pluck('id'))
+            ->whereNotIn('id', $this->users)
             ->delete();
 
         return $this;

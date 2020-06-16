@@ -48,7 +48,7 @@ class FetchMutedUsers extends BaseJob
     protected function deleteUnecessaryUsers() : self
     {
         Muted::whereUserId($this->user->id)
-            ->whereNotIn('id', $this->users->pluck('id'))
+            ->whereNotIn('id', $this->users)
             ->delete();
 
         return $this;

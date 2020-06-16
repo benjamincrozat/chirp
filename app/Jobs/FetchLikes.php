@@ -48,11 +48,11 @@ class FetchLikes extends BaseJob
                 Twitter::get('favorites/list', $parameters)
             );
 
+            $this->likes = $this->likes->concat($response);
+
             if (app()->runningUnitTests() || ($parameters['max_id'] ?? 0) === Arr::last($response)->id) {
                 break;
             }
-
-            $this->likes = $this->likes->concat($response);
         } while (true);
 
         return $this;
