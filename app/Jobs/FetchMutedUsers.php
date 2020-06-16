@@ -12,25 +12,25 @@ class FetchMutedUsers extends BaseJob
 {
     use CallsTwitter;
 
-    protected Collection $muted;
+    protected Collection $users;
 
     public function __construct(User $user)
     {
         parent::__construct($user);
 
-        $this->muted = new Collection;
+        $this->users = new Collection;
     }
 
     public function fire() : void
     {
         $this
-            ->fetchMutedUsers()
-            ->deleteUnecessaryMutedUsers()
-            ->insertNewlyMutedUsers()
+            ->fetchData()
+            ->deleteUnecessaryUsers()
+            ->insertNewUsers()
         ;
     }
 
-    protected function fetchMutedUsers() : self
+    protected function fetchData() : self
     {
         do {
             $response = $this->guardAgainstTwitterErrors(
@@ -39,39 +39,39 @@ class FetchMutedUsers extends BaseJob
                 ])
             );
 
-            $this->muted = $this->muted->concat($response->ids);
+            $this->users = $this->users->concat($response->ids);
         } while ($response->next_cursor);
 
         return $this;
     }
 
-    protected function deleteUnecessaryMutedUsers() : self
+    protected function deleteUnecessaryUsers() : self
     {
         Muted::whereUserId($this->user->id)
-            ->whereNotIn('id', $this->muted->pluck('id'))
+            ->whereNotIn('id', $this->users->pluck('id'))
             ->delete();
 
         return $this;
     }
 
-    protected function insertNewlyMutedUsers() : self
+    protected function insertNewUsers() : self
     {
         $existing = Muted::select('id')
             ->whereUserId($this->user->id)
             ->get()
             ->pluck('id');
 
-        $newlyMutedUsers = $this->getUsersDetailsForIds(
-            $this->muted->whereNotIn('id', $existing)
+        $newUsers = $this->getUsersDetailsForIds(
+            $this->users->diff($existing)
         );
 
-        Muted::insert($newlyMutedUsers->map(function (object $newlyMutedUser) {
+        Muted::insert($newUsers->map(function (object $newUser) {
             return [
-                'id'       => $newlyMutedUser->id,
+                'id'       => $newUser->id,
                 'user_id'  => $this->user->id,
-                'name'     => $newlyMutedUser->name,
-                'nickname' => $newlyMutedUser->screen_name,
-                'data'     => json_encode($newlyMutedUser),
+                'name'     => $newUser->name,
+                'nickname' => $newUser->screen_name,
+                'data'     => json_encode($newUser),
             ];
         })->toArray());
 

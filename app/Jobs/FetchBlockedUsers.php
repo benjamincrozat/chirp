@@ -12,25 +12,25 @@ class FetchBlockedUsers extends BaseJob
 {
     use CallsTwitter;
 
-    protected Collection $blocked;
+    protected Collection $users;
 
     public function __construct(User $user)
     {
         parent::__construct($user);
 
-        $this->blocked = new Collection;
+        $this->users = new Collection;
     }
 
     public function fire() : void
     {
         $this
-            ->fetchBlockedUsers()
-            ->deleteUnecessaryBlockedUsers()
-            ->insertNewlyBlockedUsers()
+            ->fetchData()
+            ->deleteUnecessaryUsers()
+            ->insertNewUsers()
         ;
     }
 
-    protected function fetchBlockedUsers() : self
+    protected function fetchData() : self
     {
         do {
             $response = $this->guardAgainstTwitterErrors(
@@ -39,39 +39,39 @@ class FetchBlockedUsers extends BaseJob
                 ])
             );
 
-            $this->blocked = $this->blocked->concat($response->ids);
+            $this->users = $this->users->concat($response->ids);
         } while ($response->next_cursor);
 
         return $this;
     }
 
-    protected function deleteUnecessaryBlockedUsers() : self
+    protected function deleteUnecessaryUsers() : self
     {
         Blocked::whereUserId($this->user->id)
-            ->whereNotIn('id', $this->blocked->pluck('id'))
+            ->whereNotIn('id', $this->users->pluck('id'))
             ->delete();
 
         return $this;
     }
 
-    protected function insertNewlyBlockedUsers() : self
+    protected function insertNewUsers() : self
     {
         $existing = Blocked::select('id')
             ->whereUserId($this->user->id)
             ->get()
             ->pluck('id');
 
-        $newlyBlockedUsers = $this->getUsersDetailsForIds(
-            $this->blocked->whereNotIn('id', $existing)
+        $newUsers = $this->getUsersDetailsForIds(
+            $this->users->diff($existing)
         );
 
-        Blocked::insert($newlyBlockedUsers->map(function (object $newlyBlockedUser) {
+        Blocked::insert($newUsers->map(function (object $newUser) {
             return [
-                'id'       => $newlyBlockedUser->id,
+                'id'       => $newUser->id,
                 'user_id'  => $this->user->id,
-                'name'     => $newlyBlockedUser->name,
-                'nickname' => $newlyBlockedUser->screen_name,
-                'data'     => json_encode($newlyBlockedUser),
+                'name'     => $newUser->name,
+                'nickname' => $newUser->screen_name,
+                'data'     => json_encode($newUser),
             ];
         })->toArray());
 
