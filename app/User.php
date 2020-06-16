@@ -42,7 +42,7 @@ class User extends Authenticatable
 
     public function followings() : HasMany
     {
-        return $this->hasMany(Follower::class);
+        return $this->hasMany(Following::class);
     }
 
     public function likes() : HasMany

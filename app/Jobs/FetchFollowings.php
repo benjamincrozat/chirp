@@ -58,14 +58,14 @@ class FetchFollowings extends BaseJob
         $this->deletions = $this->getUsersDetailsForIds(
             Following::select('id')
                 ->whereUserId($this->user->id)
-                ->whereNotIn('id', $this->followings->pluck('id'))
+                ->whereNotIn('id', $this->followings)
                 ->get()
                 ->pluck('id')
         );
 
         if ($this->deletions->isNotEmpty()) {
             Following::whereUserId($this->user->id)
-                ->whereIn('id', $this->deletions)
+                ->whereIn('id', $this->deletions->pluck('id'))
                 ->delete();
         }
 
