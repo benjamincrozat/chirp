@@ -28,17 +28,17 @@ class FetchLikesTest extends TestCase
 
         $initialCount = $user->likes()->count();
 
-        $user->likes()->limit(5)->delete();
+        $user->likes()->limit(10)->delete();
 
         $this->assertEquals(
-            $countAfterRemoving = $initialCount - 5,
+            $countAfterRemoving = $initialCount - 10,
             $user->likes()->count()
         );
 
         FetchLikes::dispatch($user);
 
         $this->assertEquals(
-            $countAfterRemoving + 5,
+            $countAfterRemoving + 10,
             $user->likes()->count()
         );
     }
@@ -48,16 +48,18 @@ class FetchLikesTest extends TestCase
     {
         FetchLikes::dispatch($user = $this->createUser());
 
+        $initialCount = $user->likes()->count();
+
         Like::create([
             'id'      => 666,
             'user_id' => $user->id,
             'data'    => ['foo' => 'bar'],
         ]);
 
-        $this->assertEquals(11, $user->likes()->count());
+        $this->assertEquals($initialCount + 1, $user->likes()->count());
 
         FetchLikes::dispatch($user);
 
-        $this->assertEquals(10, $user->likes()->count());
+        $this->assertEquals($initialCount, $user->likes()->count());
     }
 }

@@ -29,7 +29,7 @@ class ListLikesControllerTest extends TestCase
             ->getJson(route('likes.index'))
             ->assertOk()
             ->assertView()
-            ->contains(number_format($user->likes_count) . ' likes')
+            ->contains(number_format($user->fresh()->likes_count) . ' likes')
         ;
     }
 }
