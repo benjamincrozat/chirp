@@ -41,6 +41,11 @@ class FetchFollowingsTest extends TestCase
             $countAfterRemoving + 5,
             $user->followings()->count()
         );
+
+        $diff = $user->diffs()->whereFor('followings')->latest()->first();
+
+        $this->assertCount(5, $diff->additions);
+        $this->assertCount(0, $diff->deletions);
     }
 
     /** @test */
@@ -63,5 +68,10 @@ class FetchFollowingsTest extends TestCase
         FetchFollowings::dispatch($user);
 
         $this->assertEquals($initialCount, $user->followings()->count());
+
+        $diff = $user->diffs()->whereFor('followings')->latest()->first();
+
+        $this->assertCount(0, $diff->additions);
+        $this->assertCount(1, $diff->deletions);
     }
 }

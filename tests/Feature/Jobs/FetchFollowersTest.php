@@ -41,10 +41,15 @@ class FetchFollowersTest extends TestCase
             $countAfterRemoving + 5,
             $user->followers()->count()
         );
+
+        $diff = $user->diffs()->whereFor('followers')->latest()->first();
+
+        $this->assertCount(5, $diff->additions);
+        $this->assertCount(0, $diff->deletions);
     }
 
     /** @test */
-    public function it_removes_non_existing_followers_from_database() : void
+    public function it_removes_non_existing_followers_from_database_and_creates_a_diff() : void
     {
         FetchFollowers::dispatch($user = $this->createUser());
 
@@ -63,5 +68,10 @@ class FetchFollowersTest extends TestCase
         FetchFollowers::dispatch($user);
 
         $this->assertEquals($initialCount, $user->followers()->count());
+
+        $diff = $user->diffs()->whereFor('followers')->latest()->first();
+
+        $this->assertCount(0, $diff->additions);
+        $this->assertCount(1, $diff->deletions);
     }
 }
