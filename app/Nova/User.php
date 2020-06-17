@@ -43,6 +43,14 @@ class User extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
+            Text::make('Token')
+                ->nullable()
+                ->hideFromIndex(),
+
+            Text::make('Token Secret')
+                ->nullable()
+                ->hideFromIndex(),
+
             Code::make('Data')
                 ->json()
                 ->nullable(),
