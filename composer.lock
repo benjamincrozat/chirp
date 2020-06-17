@@ -4,32 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c5811da40d430734db7d9699ae463b8",
+    "content-hash": "a1bbccbe0f29118ff177523132325e26",
     "packages": [
         {
             "name": "abraham/twitteroauth",
             "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/abraham/twitteroauth.git",
-                "reference": "57108b31f208d0066ab90a23257cdd7bb974c67d"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/57108b31f208d0066ab90a23257cdd7bb974c67d",
-                "reference": "57108b31f208d0066ab90a23257cdd7bb974c67d",
-                "shasum": ""
+                "type": "path",
+                "url": "packages/twitteroauth",
+                "reference": "0acfd5d6e6f39c5d6bddd9869824ecb349cc9226"
             },
             "require": {
                 "ext-curl": "*",
-                "php": "^7.2 || ^7.3 || ^7.4"
+                "php": "^7.2 || ^7.3"
             },
             "require-dev": {
-                "php-vcr/php-vcr": "^1",
-                "php-vcr/phpunit-testlistener-vcr": "^3",
-                "phpmd/phpmd": "^2",
-                "phpunit/phpunit": "^8",
-                "squizlabs/php_codesniffer": "^3"
+                "phpmd/phpmd": "~2.6",
+                "phpunit/phpunit": "~5.7",
+                "squizlabs/php_codesniffer": "~3.0"
             },
             "type": "library",
             "autoload": {
@@ -37,7 +29,6 @@
                     "Abraham\\TwitterOAuth\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -52,15 +43,21 @@
             "description": "The most popular PHP library for use with the Twitter OAuth REST API.",
             "homepage": "https://twitteroauth.com",
             "keywords": [
-                "Twitter API",
-                "Twitter oAuth",
                 "api",
                 "oauth",
                 "rest",
                 "social",
-                "twitter"
+                "twitter",
+                "twitter api",
+                "twitter oauth"
             ],
-            "time": "2020-06-15T14:58:46+00:00"
+            "support": {
+                "source": "https://github.com/abraham/twitteroauth",
+                "issues": "https://github.com/abraham/twitteroauth/issues"
+            },
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "asm89/stack-cors",
