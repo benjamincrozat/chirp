@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'dsn' => env('SENTRY_LARAVEL_DSN', env('SENTRY_DSN')),
 
     // capture release as git sha
@@ -20,5 +19,4 @@ return [
         // Capture queue job information in breadcrumbs
         'queue_info' => true,
     ],
-
 ];

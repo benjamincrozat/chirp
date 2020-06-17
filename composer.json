@@ -17,6 +17,10 @@
     ],
     "repositories": [
         {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        },
+        {
             "type": "path",
             "url": "packages"
         }
@@ -32,6 +36,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/dusk": "^6.2",
         "laravel/framework": "^7.0",
+        "laravel/nova": "^3.6",
         "laravel/socialite": "^4.3",
         "laravel/telescope": "^3.5",
         "laravel/tinker": "^2.0",
@@ -72,7 +77,9 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan nova:publish",
+            "@php artisan telescope:publish"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
