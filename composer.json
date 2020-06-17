@@ -15,9 +15,15 @@
         "laravel",
         "sqs"
     ],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages"
+        }
+    ],
     "require": {
         "php": "^7.4",
-        "abraham/twitteroauth": "^1.1",
+        "abraham/twitteroauth": "dev-master",
         "bref/bref": "^0.5.24",
         "bref/laravel-bridge": "^0.1.0",
         "driesvints/blade-icons": "^2.2",
