@@ -6,14 +6,14 @@ use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Code;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\BelongsTo;
 
-class User extends Resource
+class Follower extends Resource
 {
     /**
      * The model the resource corresponds to.
      */
-    public static $model = \App\User::class;
+    public static $model = \App\Follower::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -44,27 +44,12 @@ class User extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Text::make('Token')
-                ->nullable()
-                ->hideFromIndex(),
-
-            Text::make('Token Secret')
-                ->nullable()
-                ->hideFromIndex(),
-
             Code::make('Data')
                 ->json()
                 ->nullable(),
 
-            HasMany::make('Likes'),
-
-            HasMany::make('Followers'),
-
-            HasMany::make('Followings'),
-
-            HasMany::make('Muted'),
-
-            HasMany::make('Blocked'),
+            BelongsTo::make('Follows', 'user', User::class)
+                ->rules('required'),
         ];
     }
 
