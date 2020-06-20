@@ -1,6 +1,9 @@
 deploy:
 	@echo "Running tests before deploying…"
 
+	# Sometimes, I don't know why, the Chrome driver gets too old.
+	php artisan dusk:chrome-driver
+
 	composer test
 
 	@echo "Installing and compiling dependencies for production…"
