@@ -33,7 +33,13 @@ class BlockedControllerTest extends TestCase
 
         $response
             ->assertView()
-            ->contains(number_format($user->blocked_count) . ' blocked users')
+            ->contains(
+                trans_choice(
+                    ':formatted blocked user| :formatted blocked users',
+                    $user->blocked_count,
+                    ['formatted' => number_format($user->blocked_count)]
+                )
+            )
         ;
 
         $this->assertEquals(30, $response->original->blockedUsers->perPage());

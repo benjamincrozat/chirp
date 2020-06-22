@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Controllers;
 
+use App\User;
 use Tests\TestCase;
 use App\Jobs\FetchLikes;
 use Tests\Concerns\CreatesUser;
@@ -22,14 +23,20 @@ class ListLikesControllerTest extends TestCase
     /** @test */
     public function likes_are_listed() : void
     {
-        FetchLikes::dispatch($user = $this->createUser());
+        FetchLikes::dispatch($this->createUser());
 
         $this
-            ->actingAs($user)
+            ->actingAs($user = User::firstOrFail())
             ->getJson(route('likes.index'))
             ->assertOk()
             ->assertView()
-            ->contains(number_format($user->fresh()->likes_count) . ' likes')
+            ->contains(
+                trans_choice(
+                    ':formatted like| :formatted likes',
+                    $user->likes_count,
+                    ['formatted' => number_format($user->likes_count)]
+                )
+            )
         ;
     }
 }

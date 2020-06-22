@@ -33,7 +33,13 @@ class MutedControllerTest extends TestCase
 
         $response
             ->assertView()
-            ->contains(number_format($user->muted_count) . ' muted users')
+            ->contains(
+                trans_choice(
+                    ':formatted muted user| :formatted muted users',
+                    $user->muted_count,
+                    ['formatted' => number_format($user->muted_count)]
+                )
+            )
         ;
 
         $this->assertEquals(30, $response->original->mutedUsers->perPage());
