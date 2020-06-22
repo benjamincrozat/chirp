@@ -24,13 +24,13 @@ class FetchBlockedUsers extends BaseJob
     public function fire() : void
     {
         $this
-            ->fetchData()
+            ->fetch()
             ->deleteUnecessaryUsers()
             ->insertNewUsers()
         ;
     }
 
-    protected function fetchData() : self
+    protected function fetch() : self
     {
         do {
             $response = $this->guardAgainstTwitterErrors(
@@ -41,6 +41,10 @@ class FetchBlockedUsers extends BaseJob
 
             $this->users = $this->users->concat($response->ids);
         } while ($response->next_cursor);
+
+        if (app()->runningUnitTests()) {
+            $this->users = $this->users->take(10);
+        }
 
         return $this;
     }

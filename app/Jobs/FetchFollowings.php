@@ -31,14 +31,14 @@ class FetchFollowings extends BaseJob
     public function fire() : void
     {
         $this
-            ->fetchFollowings()
+            ->fetch()
             ->deleteUnecessaryFollowings()
             ->insertNewFollowings()
             ->createDiff()
         ;
     }
 
-    protected function fetchFollowings() : self
+    protected function fetch() : self
     {
         do {
             $response = $this->guardAgainstTwitterErrors(
@@ -49,6 +49,10 @@ class FetchFollowings extends BaseJob
 
             $this->followings = $this->followings->concat($response->ids);
         } while ($response->next_cursor);
+
+        if (app()->runningUnitTests()) {
+            $this->followings = $this->followings->take(10);
+        }
 
         return $this;
     }

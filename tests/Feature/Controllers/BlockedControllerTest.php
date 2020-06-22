@@ -36,7 +36,7 @@ class BlockedControllerTest extends TestCase
             ->contains(number_format($user->blocked_count) . ' blocked users')
         ;
 
-        $this->assertGreaterThan($perPage = 30, $response->original->blockedUsers->total());
-        $this->assertCount($perPage, $response->original->blockedUsers);
+        $this->assertEquals(30, $response->original->blockedUsers->perPage());
+        $this->assertGreaterThan($user->blocked_count, $response->original->blockedUsers->total());
     }
 }

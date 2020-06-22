@@ -26,17 +26,17 @@ class FetchLikes extends BaseJob
     public function fire() : void
     {
         $this
-            ->fetchLikes()
+            ->fetch()
             ->deleteUnecessaryLikes()
             ->insertNewLikes()
         ;
     }
 
-    protected function fetchLikes() : self
+    protected function fetch() : self
     {
         do {
             $parameters = [
-                'count'      => 200,
+                'count'      => app()->runningUnitTests() ? 10 : 200,
                 'tweet_mode' => 'extended',
             ];
 
@@ -53,6 +53,10 @@ class FetchLikes extends BaseJob
             }
 
             $this->likes = $this->likes->concat($response);
+
+            if (app()->runningUnitTests()) {
+                break;
+            }
         } while (true);
 
         return $this;
