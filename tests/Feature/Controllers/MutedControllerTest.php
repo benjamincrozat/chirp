@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Controllers;
 
+use App\User;
 use Tests\TestCase;
 use App\Jobs\FetchMutedUsers;
 use Tests\Concerns\CreatesUser;
@@ -22,10 +23,10 @@ class MutedControllerTest extends TestCase
     /** @test */
     public function muted_users_are_listed() : void
     {
-        FetchMutedUsers::dispatch($user = $this->createUser());
+        FetchMutedUsers::dispatch($this->createUser());
 
         $response = $this
-            ->actingAs($user = $user->fresh())
+            ->actingAs($user = User::firstOrFail())
             ->getJson(route('muted'))
             ->assertOk()
         ;

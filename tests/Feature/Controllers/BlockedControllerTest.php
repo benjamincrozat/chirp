@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Controllers;
 
+use App\User;
 use Tests\TestCase;
 use App\Jobs\FetchBlockedUsers;
 use Tests\Concerns\CreatesUser;
@@ -22,10 +23,10 @@ class BlockedControllerTest extends TestCase
     /** @test */
     public function blocked_users_are_listed_and_paginated() : void
     {
-        FetchBlockedUsers::dispatch($user = $this->createUser());
+        FetchBlockedUsers::dispatch($this->createUser());
 
         $response = $this
-            ->actingAs($user = $user->fresh())
+            ->actingAs($user = User::firstOrFail())
             ->getJson(route('blocked'))
             ->assertOk()
         ;
