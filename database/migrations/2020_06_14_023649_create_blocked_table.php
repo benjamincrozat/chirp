@@ -14,7 +14,6 @@ class CreateBlockedTable extends Migration
             $table->string('name');
             $table->string('nickname');
             $table->json('data')->nullable();
-            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

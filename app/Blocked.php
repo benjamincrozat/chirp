@@ -11,6 +11,8 @@ class Blocked extends Model
         'data' => 'object',
     ];
 
+    public $timestamps = false;
+
     protected $table = 'blocked';
 
     public function user() : BelongsTo

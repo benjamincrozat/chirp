@@ -13,6 +13,8 @@ class Muted extends Model
 
     protected $table = 'muted';
 
+    public $timestamps = false;
+
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);

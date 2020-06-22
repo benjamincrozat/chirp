@@ -11,6 +11,8 @@ class Follower extends Model
         'data' => 'object',
     ];
 
+    public $timestamps = false;
+
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);

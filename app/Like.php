@@ -12,11 +12,11 @@ class Like extends Model
 {
     use Unguarded;
 
-    public $timestamps = false;
-
     protected $casts = [
         'data' => 'object',
     ];
+
+    public $timestamps = false;
 
     public function scopeMatching(Builder $query, string $terms, ?string $sort_by) : Builder
     {
