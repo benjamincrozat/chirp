@@ -17,7 +17,7 @@ class FetchBlockedCommand extends Command
 
     public function handle() : void
     {
-        if ($user = User::findOrFail($this->option('user'))) {
+        if ($user = User::find($this->option('user'))) {
             $this->line("Fetching blocked users just for <info>{$user->name}</info> (#<info>{$user->id}</info>).");
 
             $this->dispatch(FetchBlockedUsers::class, $user);
