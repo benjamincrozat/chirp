@@ -28,9 +28,9 @@
     "require": {
         "php": "^7.4",
         "abraham/twitteroauth": "dev-master",
+        "blade-ui-kit/blade-zondicons": "^0.1.1",
         "bref/bref": "^0.5.24",
         "bref/laravel-bridge": "^0.1.0",
-        "driesvints/blade-icons": "^2.2",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
