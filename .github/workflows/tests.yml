@@ -12,28 +12,23 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
 
-            - name: Cache PHP dependencies
-              uses: actions/cache@v1
+            - name: Restore Composer cache
+              uses: actions/cache@v2
               with:
-                path: ~/.composer/cache/files
-                key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-                restore-keys: |
-                  ${{ runner.os }}-composer-
+                path: ./vendor
+                key: vendor-${{ hashFiles('**/composer.lock') }}
 
-            - uses: mirromutth/mysql-action@v1.1
+            - name: Restore NPM cache
+              uses: actions/cache@v2
               with:
-                mysql version: 8.0
-                mysql database: chirp_test
-                mysql user: chirp
-                mysql password: secret
+                path: ./node_modules
+                key: node_modules-${{ hashFiles('**/yarn.lock') }}
 
-            - name: Cache JS dependencies
-              uses: actions/cache@v1
+            - name: Restore Laravel cache
+              uses: actions/cache@v2
               with:
-                path: ~/.npm
-                key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-                restore-keys: |
-                  ${{ runner.os }}-node-
+                path: ./storage/framework/cache
+                key: laravel-cache
 
             - name: Install PHP
               uses: shivammathur/setup-php@v2
@@ -43,6 +38,13 @@ jobs:
 
             - name: Install PHP dependencies
               run: composer install --no-ansi --no-interaction --no-progress --no-suggest --prefer-dist
+
+            - uses: mirromutth/mysql-action@v1.1
+              with:
+                mysql version: latest
+                mysql database: chirp_test
+                mysql user: chirp
+                mysql password: secret
 
             - name: Install JS dependencies
               run: |
