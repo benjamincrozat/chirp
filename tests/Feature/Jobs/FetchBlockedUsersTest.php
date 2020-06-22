@@ -30,17 +30,17 @@ class FetchBlockedUsersTest extends TestCase
 
         $initialCount = $user->blocked()->count();
 
-        $user->blocked()->limit(10)->delete();
+        $affectedRows = $user->blocked()->limit(10)->delete();
 
         $this->assertEquals(
-            $countAfterRemoving = $initialCount - 10,
+            $countAfterRemoving = $initialCount - $affectedRows,
             $user->blocked()->count()
         );
 
         FetchBlockedUsers::dispatch($user);
 
         $this->assertEquals(
-            $countAfterRemoving + 10,
+            $countAfterRemoving + $affectedRows,
             $user->blocked()->count()
         );
     }

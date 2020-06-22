@@ -30,17 +30,17 @@ class FetchMutedUsersTest extends TestCase
 
         $initialCount = $user->muted()->count();
 
-        $user->muted()->limit(10)->delete();
+        $affectedRows = $user->muted()->limit(10)->delete();
 
         $this->assertEquals(
-            $countAfterRemoving = $initialCount - 10,
+            $countAfterRemoving = $initialCount - $affectedRows,
             $user->muted()->count()
         );
 
         FetchMutedUsers::dispatch($user);
 
         $this->assertEquals(
-            $countAfterRemoving + 10,
+            $countAfterRemoving + $affectedRows,
             $user->muted()->count()
         );
     }
