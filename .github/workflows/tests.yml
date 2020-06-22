@@ -56,13 +56,29 @@ jobs:
                 cp .env.ci.example .env
                 php artisan key:generate
 
-            - name: Run tests
+            - name: Run Feature and Unit Tests
               run: vendor/bin/phpunit
               env:
                 TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
                 TWITTER_API_SECRET_KEY: ${{ secrets.TWITTER_API_SECRET_KEY }}
                 TWITTER_TEST_USER_ID: ${{ secrets.TWITTER_TEST_USER_ID }}
-                TWITTER_TEST_USER_NAME: ${{ secrets.TWITTER_TEST_USER_NAME }}
-                TWITTER_TEST_USER_PASSWORD: ${{ secrets.TWITTER_TEST_USER_PASSWORD }}
                 TWITTER_TEST_USER_TOKEN: ${{ secrets.TWITTER_TEST_USER_TOKEN }}
                 TWITTER_TEST_USER_TOKEN_SECRET: ${{ secrets.TWITTER_TEST_USER_TOKEN_SECRET }}
+
+            - name: Upgrade Chrome Driver
+              run: php artisan dusk:chrome-driver `/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
+
+            - name: Start Chrome Driver
+              run: ./vendor/laravel/dusk/bin/chromedriver-linux --whitelisted-ips &
+
+            - name: Serve
+              run: php artisan serve &
+
+            - name: Run Dusk Tests
+              run: php artisan dusk
+              env:
+                APP_URL: http://127.0.0.1:8000
+                TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+                TWITTER_API_SECRET_KEY: ${{ secrets.TWITTER_API_SECRET_KEY }}
+                TWITTER_TEST_USER_NAME: ${{ secrets.TWITTER_TEST_USER_NAME }}
+                TWITTER_TEST_USER_PASSWORD: ${{ secrets.TWITTER_TEST_USER_PASSWORD }}
