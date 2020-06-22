@@ -15,19 +15,19 @@ jobs:
             - name: Restore Composer cache
               uses: actions/cache@v2
               with:
-                path: ./vendor
+                path: vendor
                 key: vendor-${{ hashFiles('**/composer.lock') }}
 
-            - name: Restore NPM cache
+            - name: Restore node_modules cache
               uses: actions/cache@v2
               with:
-                path: ./node_modules
+                path: node_modules
                 key: node_modules-${{ hashFiles('**/yarn.lock') }}
 
             - name: Restore Laravel cache
               uses: actions/cache@v2
               with:
-                path: ./storage/framework/cache
+                path: storage/framework/cache
                 key: laravel-cache
 
             - name: Install PHP
@@ -62,6 +62,8 @@ jobs:
                 TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
                 TWITTER_API_SECRET_KEY: ${{ secrets.TWITTER_API_SECRET_KEY }}
                 TWITTER_TEST_USER_ID: ${{ secrets.TWITTER_TEST_USER_ID }}
+                TWITTER_TEST_USER_NAME: ${{ secrets.TWITTER_TEST_USER_NAME }}
+                TWITTER_TEST_USER_PASSWORD: ${{ secrets.TWITTER_TEST_USER_PASSWORD }}
                 TWITTER_TEST_USER_TOKEN: ${{ secrets.TWITTER_TEST_USER_TOKEN }}
                 TWITTER_TEST_USER_TOKEN_SECRET: ${{ secrets.TWITTER_TEST_USER_TOKEN_SECRET }}
 
@@ -69,7 +71,7 @@ jobs:
               run: php artisan dusk:chrome-driver `/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
 
             - name: Start Chrome Driver
-              run: ./vendor/laravel/dusk/bin/chromedriver-linux --whitelisted-ips &
+              run: vendor/laravel/dusk/bin/chromedriver-linux --whitelisted-ips &
 
             - name: Serve
               run: php artisan serve &
@@ -80,5 +82,21 @@ jobs:
                 APP_URL: http://127.0.0.1:8000
                 TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
                 TWITTER_API_SECRET_KEY: ${{ secrets.TWITTER_API_SECRET_KEY }}
+                TWITTER_TEST_USER_ID: ${{ secrets.TWITTER_TEST_USER_ID }}
                 TWITTER_TEST_USER_NAME: ${{ secrets.TWITTER_TEST_USER_NAME }}
                 TWITTER_TEST_USER_PASSWORD: ${{ secrets.TWITTER_TEST_USER_PASSWORD }}
+                TWITTER_TEST_USER_TOKEN: ${{ secrets.TWITTER_TEST_USER_TOKEN }}
+                TWITTER_TEST_USER_TOKEN_SECRET: ${{ secrets.TWITTER_TEST_USER_TOKEN_SECRET }}
+
+
+            - name: Add screenshots to the artifact if failed
+              uses: actions/upload-artifact@v2
+              if: failure()
+              with:
+                path: tests/Browser/screenshots
+
+            - name: Add log to the artifact if failed
+              uses: actions/upload-artifact@v2
+              if: failure()
+              with:
+                path: storage/logs
