@@ -38,11 +38,9 @@ class Muted extends Resource
             ID::make()->sortable(),
 
             Text::make('Name')
-                ->sortable()
                 ->rules('required', 'max:255'),
 
             Text::make('Nickname')
-                ->sortable()
                 ->rules('required', 'max:255'),
 
             Code::make('Data')
