@@ -20,6 +20,13 @@ jobs:
                 restore-keys: |
                   ${{ runner.os }}-composer-
 
+            - uses: mirromutth/mysql-action@v1.1
+              with:
+                mysql version: 8.0
+                mysql database: chirp_test
+                mysql user: chirp
+                mysql password: secret
+
             - name: Cache JS dependencies
               uses: actions/cache@v1
               with:
@@ -31,8 +38,8 @@ jobs:
             - name: Install PHP
               uses: shivammathur/setup-php@v2
               with:
-                  coverage: none
-                  extensions: bcmath, curl, dom, exif, gd, iconv, imagick, intl, libxml, mbstring, pcntl, pdo, pdo_sqlite, soap, sqlite, zip
+                coverage: none
+                extensions: bcmath, curl, dom, exif, gd, iconv, imagick, intl, libxml, mbstring, pcntl, pdo, pdo_sqlite, soap, sqlite, zip
 
             - name: Install PHP dependencies
               run: composer install --no-ansi --no-interaction --no-progress --no-suggest --prefer-dist
@@ -44,8 +51,16 @@ jobs:
 
             - name: Setup project
               run: |
-                cp .env.example .env
+                cp .env.ci.example .env
                 php artisan key:generate
 
             - name: Run tests
               run: vendor/bin/phpunit
+              env:
+                TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+                TWITTER_API_SECRET_KEY: ${{ secrets.TWITTER_API_SECRET_KEY }}
+                TWITTER_TEST_USER_ID: ${{ secrets.TWITTER_TEST_USER_ID }}
+                TWITTER_TEST_USER_NAME: ${{ secrets.TWITTER_TEST_USER_NAME }}
+                TWITTER_TEST_USER_PASSWORD: ${{ secrets.TWITTER_TEST_USER_PASSWORD }}
+                TWITTER_TEST_USER_TOKEN: ${{ secrets.TWITTER_TEST_USER_TOKEN }}
+                TWITTER_TEST_USER_TOKEN_SECRET: ${{ secrets.TWITTER_TEST_USER_TOKEN_SECRET }}

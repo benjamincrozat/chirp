@@ -1,5 +1,6 @@
 *.log
 /.env*
+!/.env.ci.example
 !/.env.example
 !/.env.production.example
 /.idea
