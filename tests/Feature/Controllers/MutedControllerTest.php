@@ -25,7 +25,7 @@ class MutedControllerTest extends TestCase
         FetchMutedUsers::dispatch($user = $this->createUser());
 
         $response = $this
-            ->actingAs($user)
+            ->actingAs($user = $user->fresh())
             ->getJson(route('muted'))
             ->assertOk()
         ;
@@ -36,6 +36,6 @@ class MutedControllerTest extends TestCase
         ;
 
         $this->assertEquals(30, $response->original->mutedUsers->perPage());
-        $this->assertGreaterThan($user->muted_count, $response->original->mutedUsers->total());
+        $this->assertEquals($user->muted_count, $response->original->mutedUsers->total());
     }
 }

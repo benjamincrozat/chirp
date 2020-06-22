@@ -22,14 +22,13 @@ class BlockedControllerTest extends TestCase
     /** @test */
     public function blocked_users_are_listed_and_paginated() : void
     {
-        FetchBlockedUsers::dispatch(
-            $user = $this->createUser()
-        );
+        FetchBlockedUsers::dispatch($user = $this->createUser());
 
         $response = $this
-            ->actingAs($user)
+            ->actingAs($user = $user->fresh())
             ->getJson(route('blocked'))
-            ->assertOk();
+            ->assertOk()
+        ;
 
         $response
             ->assertView()
@@ -37,6 +36,6 @@ class BlockedControllerTest extends TestCase
         ;
 
         $this->assertEquals(30, $response->original->blockedUsers->perPage());
-        $this->assertGreaterThan($user->blocked_count, $response->original->blockedUsers->total());
+        $this->assertEquals($user->blocked_count, $response->original->blockedUsers->total());
     }
 }
