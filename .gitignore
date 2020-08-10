@@ -10,6 +10,7 @@
 /.serverless
 /_ide_helper.php
 /_ide_helper_models.php
+/auth.json
 /node_modules
 /phpunit.xml
 /public/css
