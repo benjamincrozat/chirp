@@ -174,10 +174,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\DuskServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\NovaServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\TelescopeServiceProvider::class,
-        App\Providers\ViewServiceProvider::class,
+        App\Providers\ViewsServiceProvider::class,
     ],
 
     /*

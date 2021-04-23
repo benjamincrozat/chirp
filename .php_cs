@@ -19,4 +19,5 @@ return PhpCsFixer\Config::create()
         'ordered_imports'                   => ['sortAlgorithm' => 'length'],
         'return_type_declaration'           => ['space_before' => 'one'],
         'single_trait_insert_per_statement' => false,
+        'php_unit_method_casing'            => false,
     ]);
