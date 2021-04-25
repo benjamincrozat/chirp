@@ -30,11 +30,9 @@ trait CallsTwitter
     public function getUsersFromIds(Collection $chunks) : Collection
     {
         return $chunks->map(function (Collection $ids) {
-            return $this->guardAgainstTwitterErrors(
-                Twitter::get('users/lookup', [
-                    'user_id' => $ids->join(','),
-                ])
-            );
+            return Twitter::get('users/lookup', [
+                'user_id' => $ids->join(','),
+            ]);
         })->collapse();
     }
 
