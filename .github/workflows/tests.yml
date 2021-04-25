@@ -35,6 +35,7 @@ jobs:
               with:
                 coverage: none
                 extensions: bcmath, curl, dom, exif, gd, iconv, imagick, intl, libxml, mbstring, pcntl, pdo, pdo_sqlite, soap, sqlite, zip
+                php-version: '7.4'
 
             - name: Install PHP dependencies
               run: composer install --no-ansi --no-interaction --no-progress --no-suggest --prefer-dist
