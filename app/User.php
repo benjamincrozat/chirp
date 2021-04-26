@@ -5,11 +5,12 @@ namespace App;
 use App\Traits\Unguarded;
 use App\Presenters\UserPresenter;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Unguarded;
+    use HasFactory, Unguarded;
 
     protected $casts = [
         'data' => 'object',
