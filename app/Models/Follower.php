@@ -1,17 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Muted extends Model
+class Follower extends Model
 {
     protected $casts = [
         'data' => 'object',
     ];
-
-    protected $table = 'muted';
 
     public $timestamps = false;
 

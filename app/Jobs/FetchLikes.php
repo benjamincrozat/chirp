@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use App\Like;
-use App\User;
+use App\Models\Like;
+use App\Models\User;
 use App\Facades\Twitter;
 use Illuminate\Support\Arr;
 use App\Jobs\Traits\CallsTwitter;

@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\User;
+use App\Models\User;
 use App\Jobs\FetchBlockedUsers;
 use Illuminate\Console\Command;
 use App\Console\Commands\Traits\DispatchesJobs;

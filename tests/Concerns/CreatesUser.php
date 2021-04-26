@@ -2,7 +2,7 @@
 
 namespace Tests\Concerns;
 
-use App\User;
+use App\Models\User;
 use App\Jobs\FetchUser;
 
 trait CreatesUser

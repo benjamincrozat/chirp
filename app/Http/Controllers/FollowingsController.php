@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Diff;
+use App\Models\Diff;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 

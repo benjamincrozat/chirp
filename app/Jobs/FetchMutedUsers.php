@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use App\User;
-use App\Muted;
+use App\Models\User;
+use App\Models\Muted;
 use App\Facades\Twitter;
 use App\Jobs\Traits\CallsTwitter;
 use Illuminate\Support\Collection;

@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\User;
+use App\Models\User;
 use App\Jobs\FetchLikes;
 use Illuminate\Console\Command;
 use App\Console\Commands\Traits\DispatchesJobs;
