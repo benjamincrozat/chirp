@@ -22,9 +22,9 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^8.0",
         "abraham/twitteroauth": "dev-master",
-        "blade-ui-kit/blade-zondicons": "^0.1.1",
+        "blade-ui-kit/blade-zondicons": "^1.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
