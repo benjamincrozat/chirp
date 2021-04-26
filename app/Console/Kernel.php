@@ -2,7 +2,7 @@
 
 namespace App\Console;
 
-use App\User;
+use App\Models\User;
 use App\Jobs\FetchUser;
 use App\Jobs\FetchLikes;
 use App\Jobs\FetchFollowers;

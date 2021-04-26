@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Jobs;
 
-use App\Like;
+use App\Models\Like;
 use Tests\TestCase;
 use App\Jobs\FetchLikes;
 use Tests\Concerns\CreatesUser;

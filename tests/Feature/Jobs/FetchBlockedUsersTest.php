@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Jobs;
 
-use App\Blocked;
+use App\Models\Blocked;
 use Tests\TestCase;
 use App\Jobs\FetchBlockedUsers;
 use Tests\Concerns\CreatesUser;

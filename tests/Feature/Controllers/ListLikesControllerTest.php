@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Controllers;
 
-use App\User;
+use App\Models\User;
 use Tests\TestCase;
 use App\Jobs\FetchLikes;
 use Tests\Concerns\CreatesUser;

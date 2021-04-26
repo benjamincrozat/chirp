@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Controllers;
 
-use App\User;
+use App\Models\User;
 use Tests\TestCase;
 use App\Jobs\FetchMutedUsers;
 use Tests\Concerns\CreatesUser;

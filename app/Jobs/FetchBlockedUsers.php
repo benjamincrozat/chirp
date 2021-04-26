@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use App\User;
-use App\Blocked;
+use App\Models\User;
+use App\Models\Blocked;
 use App\Facades\Twitter;
 use App\Jobs\Traits\CallsTwitter;
 use Illuminate\Support\Collection;

@@ -2,9 +2,9 @@
 
 namespace App\Jobs;
 
-use App\Diff;
-use App\User;
-use App\Following;
+use App\Models\Diff;
+use App\Models\User;
+use App\Models\Following;
 use App\Facades\Twitter;
 use App\Jobs\Traits\CallsTwitter;
 use Illuminate\Support\Collection;
