@@ -9,11 +9,15 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest');
+        // $this->middleware('guest');
     }
 
-    public function __invoke(Request $request) : View
+    public function __invoke(Request $request)
     {
+        if ($request->user()) {
+            return redirect()->route('overview');
+        }
+
         return view('home');
     }
 }
