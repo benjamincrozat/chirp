@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Controllers;
 
-use App\Models\User;
 use Tests\TestCase;
+use App\Models\User;
 use App\Jobs\FetchBlockedUsers;
 use Tests\Concerns\CreatesUser;
 

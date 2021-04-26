@@ -4,8 +4,8 @@ namespace App\Jobs;
 
 use App\Models\Diff;
 use App\Models\User;
-use App\Models\Follower;
 use App\Facades\Twitter;
+use App\Models\Follower;
 use App\Jobs\Traits\CallsTwitter;
 use Illuminate\Support\Collection;
 

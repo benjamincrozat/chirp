@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Jobs;
 
-use App\Models\Following;
 use Tests\TestCase;
+use App\Models\Following;
 use App\Jobs\FetchFollowings;
 use Tests\Concerns\CreatesUser;
 

@@ -14,10 +14,18 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+    /**
+     * The Artisan commands provided by your application.
+     */
+    protected $commands = [
+        //
+    ];
+
+    /**
+     * Define the application's command schedule.
+     */
     protected function schedule(Schedule $schedule) : void
     {
-        // SQS doesn't support delayed jobs. We have to use the scheduler.
-
         $schedule->call(function () {
             User::cursor()->each(function (User $user) {
                 FetchBlockedUsers::dispatch($user);
@@ -30,6 +38,9 @@ class Kernel extends ConsoleKernel
         })->hourly();
     }
 
+    /**
+     * Register the commands for the application.
+     */
     protected function commands() : void
     {
         $this->load(__DIR__ . '/Commands');

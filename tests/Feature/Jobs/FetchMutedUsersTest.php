@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Jobs;
 
-use App\Models\Muted;
 use Tests\TestCase;
+use App\Models\Muted;
 use App\Jobs\FetchMutedUsers;
 use Tests\Concerns\CreatesUser;
 
