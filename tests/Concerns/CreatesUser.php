@@ -18,7 +18,7 @@ trait CreatesUser
 
     public function factoryUser() : User
     {
-        return factory(User::class)->create([
+        return User::factory()->create([
             'id'           => config('services.twitter.test_user_id'),
             'name'         => 'Benjamin Crozat',
             'nickname'     => 'benjamincrozat',
