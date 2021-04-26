@@ -43,7 +43,7 @@ jobs:
             - uses: mirromutth/mysql-action@v1.1
               with:
                 mysql version: latest
-                mysql database: chirp
+                mysql database: chirp_test
                 mysql user: chirp
                 mysql password: secret
 
