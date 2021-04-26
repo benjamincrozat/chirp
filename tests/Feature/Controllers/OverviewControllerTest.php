@@ -27,7 +27,6 @@ class OverviewControllerTest extends TestCase
             ->assertOk()
             ->assertView()
             ->contains($user->name)
-            ->contains($user->data->description)
             ->contains($user->data->location)
             ->contains($user->presenter->date())
         ;
