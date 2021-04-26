@@ -1,20 +1,5 @@
 {
     "name": "benjamincrozat/chirp",
-    "description": "A free Twitter activity tracker based on Laravel and running on AWS Lambda.",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Benjamin Crozat",
-            "email": "benjamincrozat@me.com"
-        }
-    ],
-    "keywords": [
-        "aws",
-        "dynamodb",
-        "lambda",
-        "laravel",
-        "sqs"
-    ],
     "repositories": [
         {
             "type": "path",
@@ -23,7 +8,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "abraham/twitteroauth": "dev-master",
+        "abraham/twitteroauth": "dev-develop",
         "blade-ui-kit/blade-zondicons": "^1.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
