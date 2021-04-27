@@ -1,3 +1,4 @@
+.DS_Store
 *.log
 /.env*
 !/.env.ci.example
@@ -5,11 +6,8 @@
 !/.env.production.example
 /.idea
 /.php_cs.cache
-/.phpstorm.meta.php
 /.phpunit.result.cache
 /.serverless
-/_ide_helper.php
-/_ide_helper_models.php
 /auth.json
 /node_modules
 /phpunit.xml
@@ -21,3 +19,4 @@
 /public/vendor
 /storage/*.key
 /vendor
+Thumbs.db
