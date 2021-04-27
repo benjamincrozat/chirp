@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Likes;
+namespace App\Http\Controllers;
 
 use Illuminate\View\View;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 
 class SearchLikesController extends Controller

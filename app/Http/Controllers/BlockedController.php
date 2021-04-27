@@ -15,7 +15,7 @@ class BlockedController extends Controller
     public function __invoke(Request $request) : View
     {
         return view('blocked')->with([
-            'blocked_users' => $request->user()->blocked()->paginate(30),
+            'blockedUsers' => $request->user()->blocked()->paginate(30),
         ]);
     }
 }

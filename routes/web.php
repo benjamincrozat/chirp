@@ -7,11 +7,11 @@ use App\Http\Controllers\BlockedController;
 use App\Http\Controllers\OverviewController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\FollowersController;
+use App\Http\Controllers\ListLikesController;
 use App\Http\Controllers\DeleteUserController;
 use App\Http\Controllers\FollowingsController;
+use App\Http\Controllers\SearchLikesController;
 use App\Http\Controllers\Auth\SocialiteController;
-use App\Http\Controllers\Likes\ListLikesController;
-use App\Http\Controllers\Likes\SearchLikesController;
 
 Route::get('/', HomeController::class)->name('home');
 Route::get('/blocked', BlockedController::class)->name('blocked');

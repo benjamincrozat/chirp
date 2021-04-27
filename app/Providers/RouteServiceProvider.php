@@ -10,16 +10,8 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * The path to the "home" route for your application.
-     *
-     * This is used by Laravel authentication to redirect users after login.
-     */
     public const HOME = '/';
 
-    /**
-     * Define your route model bindings, pattern filters, etc.
-     */
     public function boot() : void
     {
         $this->configureRateLimiting();
@@ -36,9 +28,6 @@ class RouteServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Configure the rate limiters for the application.
-     */
     protected function configureRateLimiting() : void
     {
         RateLimiter::for('api', function (Request $request) {

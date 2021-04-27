@@ -16,7 +16,9 @@ class TweetPresenter
 
     public function date() : string
     {
-        return Carbon::parse($this->data->created_at)->isoFormat('LL');
+        return Carbon::parse(
+            $this->data->created_at
+        )->isoFormat('LL');
     }
 
     public function media() : Collection

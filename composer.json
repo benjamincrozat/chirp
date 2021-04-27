@@ -22,6 +22,7 @@
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
         "beyondcode/laravel-dump-server": "^1.7",
+        "brianium/paratest": "^6.2",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.14.1",
         "mockery/mockery": "^1.4.2",

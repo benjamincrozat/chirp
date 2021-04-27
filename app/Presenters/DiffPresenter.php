@@ -16,16 +16,22 @@ class DiffPresenter
 
     public function date() : string
     {
-        return Carbon::parse($this->data->date)->isoFormat('LL');
+        return Carbon::parse(
+            $this->data->date
+        )->isoFormat('LL');
     }
 
     public function additions() : array
     {
-        return Arr::collapse(json_decode($this->data->additions, true));
+        return Arr::collapse(
+            json_decode($this->data->additions, true)
+        );
     }
 
     public function deletions() : array
     {
-        return Arr::collapse(json_decode($this->data->deletions, true));
+        return Arr::collapse(
+            json_decode($this->data->deletions, true)
+        );
     }
 }

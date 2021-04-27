@@ -15,7 +15,7 @@ class MutedController extends Controller
     public function __invoke(Request $request) : View
     {
         return view('muted')->with([
-            'muted_users' => $request->user()->muted()->paginate(30),
+            'mutedUsers' => $request->user()->muted()->paginate(30),
         ]);
     }
 }
