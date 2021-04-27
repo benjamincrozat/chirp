@@ -19,7 +19,7 @@ abstract class TestCase extends BaseTestCase
             return new class($app['config']->get('services.twitter.client_id'), $app['config']->get('services.twitter.client_secret')) extends TwitterOAuth {
                 public function get($path, array $parameters = [])
                 {
-                    $key = "{$path}_" . md5(serialize($parameters));
+                    $key = $path . '_' . md5(serialize($parameters));
 
                     if (cache()->has($key)) {
                         $this->response->setHttpCode(200);
