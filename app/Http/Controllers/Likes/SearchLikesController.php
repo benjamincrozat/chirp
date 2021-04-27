@@ -14,17 +14,16 @@ class SearchLikesController extends Controller
         $this->middleware('auth');
     }
 
-    public function __invoke(Request $request)
+    public function __invoke(Request $request) : mixed
     {
         if (! $request->terms) {
-            return Redirect::route('likes.index');
+            return redirect()->route('likes.index');
         }
 
-        return view('search')
-            ->withLikes(
-                $request->user()->likes()->matching($request->terms, $request->sort_by)->paginate(30)
-            )
-            ->withSortBy($request->sort_by)
-            ->withTerms($request->terms);
+        return view('search')->with([
+            'likes'   => $request->user()->likes()->matching($request->terms, $request->sort_by)->paginate(30),
+            'sort_by' => $request->sort_by,
+            'terms'   => $request->terms,
+        ]);
     }
 }

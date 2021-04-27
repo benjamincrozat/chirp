@@ -15,8 +15,8 @@ class ListLikesController extends Controller
 
     public function __invoke(Request $request) : View
     {
-        return view('likes')->withLikes(
-            $request->user()->likes()->orderBy('id', 'desc')->paginate(30)
-        );
+        return view('likes')->with([
+            'likes' => $request->user()->likes()->orderBy('id', 'desc')->paginate(30),
+        ]);
     }
 }

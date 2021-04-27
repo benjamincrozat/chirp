@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-
 class HomeController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke() : mixed
     {
-        if (Auth::check()) {
-            return Redirect::route('overview');
+        if (auth()->check()) {
+            return redirect()->route('overview');
         }
 
         return view('home');

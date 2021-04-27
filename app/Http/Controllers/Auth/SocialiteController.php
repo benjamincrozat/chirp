@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Redirect;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
@@ -41,15 +39,15 @@ class SocialiteController extends Controller
             event(new Registered($user));
         }
 
-        Auth::login($user, true);
+        auth()->login($user, true);
 
-        return Redirect::route('overview');
+        return redirect()->route('overview');
     }
 
     public function logout() : \Illuminate\Http\RedirectResponse
     {
-        Auth::logout();
+        auth()->logout();
 
-        return Redirect::route('home');
+        return redirect()->route('home');
     }
 }

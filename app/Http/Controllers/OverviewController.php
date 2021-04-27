@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 
 class OverviewController extends Controller
 {
@@ -12,7 +11,7 @@ class OverviewController extends Controller
         $this->middleware('auth');
     }
 
-    public function __invoke(Request $request) : View
+    public function __invoke() : View
     {
         return view('overview');
     }
