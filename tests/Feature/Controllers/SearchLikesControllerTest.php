@@ -25,9 +25,11 @@ class ListLikesControllerTest extends TestCase
     {
         FetchLikes::dispatch($this->createUser());
 
+        $terms = 'foo';
+
         $this
             ->actingAs($user = User::firstOrFail())
-            ->get(route('likes.search', ['terms' => $terms = 'foo']))
+            ->get(route('likes.search', compact('terms')))
             ->assertOk()
             ->assertView()
             ->contains("Search results for \"$terms\"")
