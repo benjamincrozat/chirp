@@ -20,9 +20,9 @@ class SearchLikesController extends Controller
         }
 
         return view('search')->with([
-            'likes'   => $request->user()->likes()->matching($request->terms, $request->sort_by)->paginate(30),
-            'sort_by' => $request->sort_by,
-            'terms'   => $request->terms,
+            'likes'  => $request->user()->likes()->matching($request->terms, $request->sort_by)->paginate(30),
+            'sortBy' => $request->sort_by,
+            'terms'  => $request->terms,
         ]);
     }
 }

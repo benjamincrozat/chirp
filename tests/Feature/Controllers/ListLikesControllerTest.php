@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Jobs\FetchLikes;
 use Tests\Concerns\CreatesUser;
 
-class ListLikesControllerTest extends TestCase
+class SearchLikesControllerTest extends TestCase
 {
     use CreatesUser;
 
