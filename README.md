@@ -1,14 +1,12 @@
-![Meet Chirp, a free Twitter activity tracker](https://d1srrlgsf6kxjv.cloudfront.net/img/banner.jpg)
+![Meet Chirp, a free Twitter activity tracker](https://user-images.githubusercontent.com/3613731/116201789-2ffd4000-a73a-11eb-816f-8e4c30181812.jpg)
 
 # Chirp
 
-[Chirp](https://chirp.benjamincrozat.com) is a Laravel based app running on AWS Lambda. It also uses RDS, SQS and DynamoDB. I hope you'll be able to learn something from it. Also, I'm always thrilled to receive good critisism and PRs.
+A free Twitter activity tracker based on Laravel.
 
-## Table of contents
+## Screenshot
 
-- [Development](#development)
-- [Testing](#testing)
-- [Deployment](#deployment)
+![Screenshot](https://user-images.githubusercontent.com/3613731/116202257-a8fc9780-a73a-11eb-8868-daf341adb000.png)
 
 ## Development
 
@@ -38,14 +36,6 @@ Few notes about my testing strategy:
 composer test
 ```
 
-## Deployment
-
-```bash
-cp .env.production.example .env.production
-
-make
-```
-
 ## License
 
-MIT
+[WTFPL]()
